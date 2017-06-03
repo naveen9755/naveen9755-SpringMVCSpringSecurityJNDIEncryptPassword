@@ -3,8 +3,8 @@
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>SpringMVCSecurity</groupId>
-	<artifactId>SpringMVCSecurity</artifactId>
+	<groupId>SpringMVCSpringSecurityJNDIEncryptPassword</groupId>
+	<artifactId>SpringMVCSpringSecurityJNDIEncryptPassword</artifactId>
 	<packaging>war</packaging>
 	<version>1.0.0</version>
 	<name>SpringMVCSecurity</name>
@@ -138,12 +138,12 @@
 					<version>2.4</version>
 					<configuration>
 						<warSourceDirectory>src/main/webapp</warSourceDirectory>
-						<warName>SpringMVCSecurity</warName>
+						<warName>SpringMVCSpringSecurityJNDIEncryptPassword</warName>
 						<failOnMissingWebXml>false</failOnMissingWebXml>
 					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
-		<finalName>SpringMVCSecurity</finalName>
+		<finalName>SpringMVCSpringSecurityJNDIEncryptPassword</finalName>
 	</build>
 </project>
