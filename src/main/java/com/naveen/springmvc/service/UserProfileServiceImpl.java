@@ -1,6 +1,4 @@
 package com.naveen.springmvc.service;
-
-
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -11,8 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.naveen.springmvc.dao.UserProfileDao;
 import com.naveen.springmvc.model.UserProfile;
-
-
 @Service("userProfileService")
 @Transactional
 public class UserProfileServiceImpl implements UserProfileService{
@@ -31,4 +27,5 @@ public class UserProfileServiceImpl implements UserProfileService{
 	public List<UserProfile> findAll() {
 		return dao.findAll();
 	}
-}
+
+  }

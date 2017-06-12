@@ -1,9 +1,11 @@
 package com.naveen.springmvc.controller;
 import java.util.List;
 import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +25,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.naveen.springmvc.beans.PropertyBeans;
 import com.naveen.springmvc.model.User;
 import com.naveen.springmvc.model.UserProfile;
 import com.naveen.springmvc.service.UserProfileService;
 import com.naveen.springmvc.service.UserService;
-
-
+import com.naveen.springmvc.util.MailUtil;
 
 @Controller
 @RequestMapping("/")
@@ -49,8 +51,7 @@ public class AppController {
 	
 	@Autowired
 	AuthenticationTrustResolver authenticationTrustResolver;
-	
-	
+
 	/**
 	 * This method will list all existing users.
 	 */
@@ -80,13 +81,12 @@ public class AppController {
 	 * saving user in database. It also validates the user input
 	 */
 	@RequestMapping(value = { "/newuser" }, method = RequestMethod.POST)
-	public String saveUser(@Valid User user, BindingResult result,
-			ModelMap model) {
-
+	public String saveUser(@Valid User user, BindingResult result, ModelMap model) {
+		String firstPropery=null;
+        String secoundProperty=null;
 		if (result.hasErrors()) {
 			return "registration";
 		}
-
 		/*
 		 * Preferred way to achieve uniqueness of field [sso] should be implementing custom @Unique annotation 
 		 * and applying it on field [sso] of Model class [User].
@@ -97,9 +97,20 @@ public class AppController {
 		 */
 		if(!userService.isUserSSOUnique(user.getId(), user.getSsoId())){
 			FieldError ssoError =new FieldError("user","ssoId",messageSource.getMessage("non.unique.ssoId", new String[]{user.getSsoId()}, Locale.getDefault()));
-		    result.addError(ssoError);
+		    result.addError(ssoError); 
 			return "registration";
 		}
+		
+		PropertyBeans propertyBeans = MailUtil.detailsProperty(firstPropery, secoundProperty);
+		
+		User userSender = userService.findBySSO(propertyBeans.getFirstPropery());
+		
+		logger.info("user.getEmail()=="+user.getEmail()+"==userSender.getEmail()=="+userSender.getEmail()
+				+"===propertyBeans.get==="+propertyBeans.getSecoundProperty().toString());
+		
+		@SuppressWarnings("unused")
+		boolean sentMail = MailUtil.sendSpring(user.getEmail(), userSender.getEmail(),
+				propertyBeans.getSecoundProperty().toString());
 		
 		userService.saveUser(user);
 
@@ -211,7 +222,6 @@ public class AppController {
 	private String getPrincipal(){
 		String userName = null;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
 		if (principal instanceof UserDetails) {
 			userName = ((UserDetails)principal).getUsername();
 		} else {
@@ -227,6 +237,4 @@ public class AppController {
 	    final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 	    return authenticationTrustResolver.isAnonymous(authentication);
 	}
-
-
-}
+   }

@@ -13,15 +13,19 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.naveen.springmvc.beans.PropertyBeans;
 import com.naveen.springmvc.util.EncryptUtil;
+import com.naveen.springmvc.util.MailUtil;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({ "com.naveen.springmvc.configuration" })
+@ComponentScan({ "com.naveen.springmvc.configuration"})
 @PropertySource(value = { "classpath:application.properties" })
 public class HibernateConfiguration {
 	static final Logger logger = LoggerFactory.getLogger(HibernateConfiguration.class);
@@ -62,5 +66,5 @@ public class HibernateConfiguration {
        txManager.setSessionFactory(s);
        return txManager;
     }
-}
+   }
 

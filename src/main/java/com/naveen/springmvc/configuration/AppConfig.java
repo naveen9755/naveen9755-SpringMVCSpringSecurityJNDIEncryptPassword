@@ -1,4 +1,6 @@
 package com.naveen.springmvc.configuration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -13,15 +15,14 @@ import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
-import com.naveen.springmvc.converter.RoleToUserProfileConverter;
 
+import com.naveen.springmvc.converter.RoleToUserProfileConverter;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.naveen.springmvc")
 public class AppConfig extends WebMvcConfigurerAdapter{
-	
-	
+static final Logger logger = LoggerFactory.getLogger(AppConfig.class);
 	@Autowired
 	RoleToUserProfileConverter roleToUserProfileConverter;
 	
@@ -75,5 +76,6 @@ public class AppConfig extends WebMvcConfigurerAdapter{
     public void configurePathMatch(PathMatchConfigurer matcher) {
         matcher.setUseRegisteredSuffixPatternMatch(true);
     }
-}
+    
+    }
 

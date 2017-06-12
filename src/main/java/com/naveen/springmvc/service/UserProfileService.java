@@ -1,11 +1,7 @@
 package com.naveen.springmvc.service;
-
-
 import java.util.List;
 
 import com.naveen.springmvc.model.UserProfile;
-
-
 
 public interface UserProfileService {
 
