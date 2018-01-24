@@ -17,7 +17,7 @@ public class EncryptUtil {
     };
 
     public static void main(String[] args) throws Exception {
-        String originalPassword = "abc125";
+        String originalPassword = "12345";
         System.out.println("Original password: " + originalPassword);
         String encryptedPassword = encrypt(originalPassword);
         System.out.println("Encrypted password: " + encryptedPassword);
