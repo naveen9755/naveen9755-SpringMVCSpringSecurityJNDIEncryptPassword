@@ -10,7 +10,7 @@
 	<name>SpringMVCSecurity</name>
 
   	<properties>
-		<springframework.version>4.2.5.RELEASE</springframework.version>
+		<springframework.version>5.2.5.RELEASE</springframework.version>
 		<springsecurity.version>4.2.3.RELEASE</springsecurity.version>
 		<hibernate.version>5.2.12.Final</hibernate.version>
 		<mysql.connector.version>6.0.6</mysql.connector.version>
