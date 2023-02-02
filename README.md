@@ -7,7 +7,7 @@ Need to change three files in tomcat For JNDI DataSource.
 2- Web.xml
 3- Context.xml
 4- First User:  sam , Password: abc125
-5- Run the all Query Which is mentions below. 
+5- Run the all Query Which is mentioned below. 
 ============================================================================================================
       
 
